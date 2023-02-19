@@ -23,11 +23,21 @@ class BreakingNewsFragment: Fragment(R.layout.fragment_breaking_news) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = (activity as NewsActivity).viewModel
         setupRecyclerView()
+
+
+        //breakingNews contains liveData and contains all NewsResponse
+        //we set a observer on viewModel
         viewModel.breakingNews.observe(viewLifecycleOwner, Observer{response->
             when(response){
+
+                //when response is successful
                 is Resource.Success->{
+                    //we set ProgressBar in NewsViewModel getBreakingNews
                     hideProgressBar()
+                    //check data is not null
                     response.data?.let{newsResponse ->
+                        //set newsResponse in the adapter
+                        //differ is used to check the difference between old and new list
                         newsAdapter.differ.submitList(newsResponse.articles)
                     }
                 }
@@ -36,7 +46,6 @@ class BreakingNewsFragment: Fragment(R.layout.fragment_breaking_news) {
                     hideProgressBar()
                     response.message?.let{message->
                         Log.e(TAG,"An error occures: $message")
-
                     }
                 }
 
@@ -56,6 +65,9 @@ class BreakingNewsFragment: Fragment(R.layout.fragment_breaking_news) {
     }
 
     private fun setupRecyclerView(){
+        //set adapter and layoutManager
+        //adapter is a intermediary between viewHolder and recyclerView
+        //layoutManager will tell how to define views (Grid, vertical etc.)
         newsAdapter= NewsAdapter()
         rvBreakingNews.apply{
             adapter=newsAdapter
