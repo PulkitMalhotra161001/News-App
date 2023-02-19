@@ -1,11 +1,12 @@
 package com.androiddevs.mvvmnewsapp.API
 
-import com.androiddevs.mvvmnewsapp.NewsResponse
+import com.androiddevs.mvvmnewsapp.Models.NewsResponse
 import com.androiddevs.mvvmnewsapp.util.Constants.Companion.API_KEY
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
+//to use retrofit first step is to create interface and define methods
 interface NewsAPI {
 
 //    retrofit requests => get, put, post, delete
@@ -23,15 +24,16 @@ interface NewsAPI {
         @Query("country")
         countryCode: String = "in",
 
-// page is the name of the query parameter that api accepts
+        //page is the name of the query parameter that api accepts
         @Query("page")
-        pageNumber: Int=1,
+        pageNumber: Int = 1,
 
-//        api takes apikey (depends on api docs), authorize that u are allowed to access the api, we need to pass apikey to each requests
+        //api takes apikey (depends on api docs), authorize that u are allowed to access the api, we need to pass apikey to each requests
         @Query("apiKey")
-        apiKey:String=API_KEY
+        apiKey: String = API_KEY
 
 
+    //it will return NewsResponse
     ): Response<NewsResponse>
 
     @GET("v2/everything")
@@ -42,10 +44,10 @@ interface NewsAPI {
         searchQuery: String,
 
         @Query("page")
-        pageNumber: Int=1,
+        pageNumber: Int = 1,
 
         @Query("apiKey")
-        apiKey:String=API_KEY
+        apiKey: String = API_KEY
 
 
     ): Response<NewsResponse>
