@@ -22,4 +22,6 @@ data class Article(
     val title: String,
     val url: String,
     val urlToImage: String
-)
+) : java.io.Serializable
+//we declared it as a Serializable so that we can share this class between fragments
+//to declare this class as a argument for our Article Fragment (add argument in nav graph)

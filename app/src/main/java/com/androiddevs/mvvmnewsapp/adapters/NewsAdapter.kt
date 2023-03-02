@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.androiddevs.mvvmnewsapp.Models.Article
 import com.androiddevs.mvvmnewsapp.R
+import com.androiddevs.mvvmnewsapp.Models.Article
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_article_preview.view.*
 
@@ -73,6 +73,12 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
 
     }
 
+    override fun getItemCount(): Int {
+        return differ.currentList.size
+    }
+
+    private var onItemClickListener: ((Article) -> Unit)? = null
+
     //based on position it bind the data into view that visible on screen
     //now we created view and want to set data in it based on position
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
@@ -89,18 +95,12 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
             tvPublishedAt.text = article.publishedAt
 
             //set clickListener
-            setOnItemClickListener {
+            setOnClickListener {
                 //it refers to onItemClickListener lambda function
                 onItemClickListener?.let { it(article) }
             }
         }
     }
-
-    override fun getItemCount(): Int {
-        return differ.currentList.size
-    }
-
-    private var onItemClickListener: ((Article) -> Unit)? = null
 
     fun setOnItemClickListener(listener: (Article) -> Unit) {
         onItemClickListener = listener
