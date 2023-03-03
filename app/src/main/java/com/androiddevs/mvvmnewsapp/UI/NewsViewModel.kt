@@ -180,6 +180,7 @@ safeSearchNewsCall(searchQuery)
             //just for checking network state
             val capabilities = connectivityManager.getNetworkCapabilities(activityNetwork)?:return false
             return when{
+//                checkout network
                 capabilities.hasTransport(TRANSPORT_WIFI) -> true
                 capabilities.hasTransport(TRANSPORT_CELLULAR) -> true
                 capabilities.hasTransport(TRANSPORT_ETHERNET) -> true
