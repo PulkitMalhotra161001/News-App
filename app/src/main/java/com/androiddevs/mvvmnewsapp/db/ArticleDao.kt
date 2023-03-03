@@ -18,11 +18,11 @@ interface ArticleDao {
     //onConflict means what if data is already present in our database
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     //insert or update
-    //suspend function because we want to accees inside our coroutine
-    suspend fun upsert(article: Article): Long
+    //suspend function because we want to access inside our coroutine
+    suspend fun upsert(article: Article) : Long
 
     //select all from article table
-    //we declared tablename in article class
+    //we declared table name in article class
     @Query("SELECT * FROM articles")
     //this will not be the suspend fun because it will return livedata and this doesn't work with suspend func
     fun getAllArticles(): LiveData<List<Article>>

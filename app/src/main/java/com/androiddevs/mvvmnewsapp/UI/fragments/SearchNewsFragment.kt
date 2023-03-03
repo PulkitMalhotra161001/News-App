@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AbsListView
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -38,7 +39,7 @@ class SearchNewsFragment: Fragment(R.layout.fragment_search_news) {
         //to share data(in this case we have article) between fragments
         newsAdapter.setOnItemClickListener {
 
-            //put it in a budle
+            //put it in a bundle
             val bundle = Bundle().apply{
                 //Serializable bcz this is a complex data type
                 putSerializable("article",it)
@@ -88,7 +89,7 @@ class SearchNewsFragment: Fragment(R.layout.fragment_search_news) {
                 is Resource.Error->{
                     hideProgressBar()
                     response.message?.let{message->
-                        Log.e(TAG,"An error occurs: $message")
+                        Toast.makeText(activity,"An error oocured: $message", Toast.LENGTH_LONG).show()
                     }
                 }
 
