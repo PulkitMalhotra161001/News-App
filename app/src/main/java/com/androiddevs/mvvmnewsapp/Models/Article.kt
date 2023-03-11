@@ -1,12 +1,15 @@
 package com.androiddevs.mvvmnewsapp.Models
 
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
 //to save our article in our database we need annotate entity
 //we tell android studio that this class is a table in database
 @Entity(
-    tableName = "articles"
+    tableName = "articles",
+    //it will help while dealing with same type of data
+    indices = [Index(value = ["title", "url"], unique = true)]
 )
 
 data class Article(

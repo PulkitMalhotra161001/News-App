@@ -22,7 +22,7 @@ import com.androiddevs.mvvmnewsapp.Models.Article
 //database class for room always need to be abstract class (data hiding)
 abstract class ArticleDatabase : RoomDatabase(){
 
-    //created an object to access funtions (implementation is handled by room)
+    //created an object to access functions (implementation is handled by room)
     abstract fun getArticleDao(): ArticleDao
 
     //it can be called without having the instance
